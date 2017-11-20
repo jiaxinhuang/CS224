@@ -51,13 +51,12 @@ def getSentenceFeatures(tokens, wordVectors, sentence):
     ### YOUR CODE HERE
     # raise NotImplementedError
     for word in sentence:
-    	sentence += wordVectors[tokens[word]]
-    sentence /= len(sentence)
+    	sentVector += wordVectors[tokens[word], :]
+    sentVector = sentVector*1.0/len(sentence)
     ### END YOUR CODE
 
     assert sentVector.shape == (wordVectors.shape[1],)
     return sentVector
-
 
 def getRegularizationValues():
     """Try different regularizations
