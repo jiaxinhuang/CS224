@@ -146,8 +146,8 @@ class ParserModel(Model):
         with tf.variable_scope("pred"):
             W = xavier_init([self.config.n_features * self.config.embed_size, self.config.hidden_size])
             U = xavier_init([self.config.hidden_size, self.config.n_classes])
-            b1 = tf.Variable(tf.random_normal([self.config.hidden_size,]))
-            b2 = tf.Variable(tf.random_normal([self.config.n_classes]))
+            b1 = tf.Variable(tf.random_uniform([self.config.hidden_size,]))
+            b2 = tf.Variable(tf.random_uniform([self.config.n_classes]))
             
             z1 = tf.matmul(x, W)+b1
             h = tf.nn.relu(z1)
@@ -240,7 +240,6 @@ def main(debug=True):
     print 80 * "="
     config = Config()
     parser, embeddings, train_examples, dev_set, test_set = load_and_preprocess_data(debug)
-    print dev_set[0]
     if not os.path.exists('./data/weights/'):
         os.makedirs('./data/weights/')
 
