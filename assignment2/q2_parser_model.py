@@ -239,6 +239,7 @@ def main(debug=True):
     print "INITIALIZING"
     print 80 * "="
     config = Config()
+    debug = False
     parser, embeddings, train_examples, dev_set, test_set = load_and_preprocess_data(debug)
     if not os.path.exists('./data/weights/'):
         os.makedirs('./data/weights/')
