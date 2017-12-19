@@ -222,16 +222,16 @@ class WindowModel(NERModel):
         x = self.add_embedding()
         dropout_rate = self.dropout_placeholder
         ### YOUR CODE HERE (~10-20 lines)
-#with tf.variable_scope("pred"):
-	W = tf.get_variable(shape=[self.config.n_window_features * self.config.embed_size, self.config.hidden_size], initializer=tf.contrib.layers.xavier_initializer(seed=1), name="W")
-        U = tf.get_variable(shape=[self.config.hidden_size, self.config.n_classes], initializer=tf.contrib.layers.xavier_initializer(seed=2), name="U")
-        b1 = tf.get_variable(shape=[self.config.hidden_size,], initializer=tf.contrib.layers.xavier_initializer(seed=3), name="b1")
-	b2 = tf.get_variable(shape=[self.config.n_classes], initializer=tf.contrib.layers.xavier_initializer(seed=4), name="b2")
+        with tf.variable_scope("pred"):
+	    W = tf.get_variable(shape=[self.config.n_window_features * self.config.embed_size, self.config.hidden_size], initializer=tf.contrib.layers.xavier_initializer(seed=1), name="W")
+            U = tf.get_variable(shape=[self.config.hidden_size, self.config.n_classes], initializer=tf.contrib.layers.xavier_initializer(seed=2), name="U")
+            b1 = tf.get_variable(shape=[self.config.hidden_size,], initializer=tf.contrib.layers.xavier_initializer(seed=3), name="b1")
+	    b2 = tf.get_variable(shape=[self.config.n_classes], initializer=tf.contrib.layers.xavier_initializer(seed=4), name="b2")
 
-	z1 = tf.matmul(x, W)+b1
-	h = tf.nn.relu(z1)
-        h_drop = tf.nn.dropout(h, dropout_rate)
-        pred = tf.matmul(h_drop, U) + b2
+	    z1 = tf.matmul(x, W)+b1
+	    h = tf.nn.relu(z1)
+            h_drop = tf.nn.dropout(h, dropout_rate)
+            pred = tf.matmul(h_drop, U) + b2
         ### END YOUR CODE
         return pred
 
